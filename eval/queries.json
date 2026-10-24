@@ -1,0 +1,146 @@
+[
+  {
+    "q": "createAtomicClient",
+    "expect": "/docs/core/client"
+  },
+  {
+    "q": "suggest queries autocomplete",
+    "expect": "/docs/search/autocomplete"
+  },
+  {
+    "q": "CSRF token",
+    "expect": "/docs/auth/how-it-works"
+  },
+  {
+    "q": "aggregations facets",
+    "expect": "/docs/search/aggregations"
+  },
+  {
+    "q": "preview highlights",
+    "expect": "/docs/documents/preview"
+  },
+  {
+    "q": "proxy configuration angular",
+    "expect": "/docs/start/proxy"
+  },
+  {
+    "q": "paging",
+    "expect": "/docs/search/text-and-paging"
+  },
+  {
+    "q": "similar documents",
+    "expect": "/docs/documents/similar-documents"
+  },
+  {
+    "q": "sponsored links",
+    "expect": "/docs/documents/sponsored-links"
+  },
+  {
+    "q": "principal",
+    "expect": "/docs/users/principal"
+  },
+  {
+    "q": "AuthGuard password expired",
+    "expect": "/docs/atomic-angular/auth/auth-guard"
+  },
+  {
+    "q": "principal store",
+    "expect": "/docs/atomic-angular/auth/principal-store"
+  },
+  {
+    "q": "auth interceptor bearer",
+    "expect": "/docs/atomic-angular/auth/auth-interceptor"
+  },
+  {
+    "q": "collections",
+    "expect": "/docs/atomic-angular/collections-and-labels/collections"
+  },
+  {
+    "q": "bookmarks",
+    "expect": "/docs/atomic-angular/bookmarks-and-searches/bookmarks"
+  },
+  {
+    "q": "button variants",
+    "expect": "/docs/galactik/buttons/button"
+  },
+  {
+    "q": "dialog",
+    "expect": "/docs/galactik/overlay/dialog"
+  },
+  {
+    "q": "tooltip",
+    "expect": "/docs/galactik/overlay/tooltip"
+  },
+  {
+    "q": "close a sheet",
+    "expect": "/docs/galactik/overlay/sheet"
+  },
+  {
+    "q": "BreakpointObserverService",
+    "expect": "/docs/galactik/integration/breakpoint-observer"
+  },
+  {
+    "q": "search bar",
+    "expect": "/docs/galactik/form/search-bar"
+  },
+  {
+    "q": "RowGrid",
+    "expect": "/docs/galactik/display/row-grid"
+  },
+  {
+    "q": "impersonation",
+    "expect": "/docs/users/impersonation"
+  },
+  {
+    "q": "export results csv",
+    "expect": "/docs/search/export"
+  },
+  {
+    "q": "query syntax operators",
+    "expect": "/docs/search/query-syntax"
+  },
+  {
+    "q": "theme toggle dark mode",
+    "expect": "/docs/atomic-angular/theming-and-shell/theme-toggle"
+  },
+  {
+    "q": "infinite scroll",
+    "expect": "/docs/atomic-angular/results/infinite-scroll-and-overflow"
+  },
+  {
+    "q": "did you mean spelling",
+    "expect": "/docs/atomic-angular/results/did-you-mean"
+  },
+  {
+    "q": "word cloud",
+    "expect": "/docs/atomic-angular/dataviz/word-cloud"
+  },
+  {
+    "q": "upload documents to a workspace",
+    "expect": "/docs/atomic-angular/workspaces/upload-documents"
+  },
+  {
+    "q": "keyboard shortcuts",
+    "expect": "/docs/atomic-angular/reference/keyboard-shortcuts"
+  },
+  {
+    "q": "several backends federated search",
+    "expect": "/docs/integration/multiple-backends"
+  },
+  {
+    "q": "show failed requests as toasts",
+    "expect": "/docs/atomic-angular/integration/atomic-notifications"
+  },
+  {
+    "q": "SharePoint",
+    "expect": "/docs/integration/spfx"
+  },
+  {
+    "q": "select dropdown",
+    "expect": "/docs/galactik/form/select"
+  },
+  {
+    "q": "resizable panels",
+    "expect": "/docs/galactik/layout/resizable"
+  }
+]
