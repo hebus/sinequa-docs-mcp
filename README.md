@@ -9,22 +9,37 @@ Serveur MCP sur la documentation publiée des librairies Sinequa : **atomic**, *
 | `docs_read` | une page en Markdown, depuis son chemin, son URL ou un chemin relatif (`auth/sign-in`) ; `#ancre` ou `section` pour une section seule (et ses sous-sections) |
 | `docs_index` | sommaire : titre, chemin et description de chaque page |
 
-## Installer
+## Installer dans Claude Code
+
+Une commande, Node ≥ 20 suffit :
 
 ```bash
-cd C:/dev/sinequa-docs-mcp
+claude mcp add --scope user sinequa-docs -- npx -y github:hebus/sinequa-docs-mcp
+```
+
+Puis `/mcp` dans Claude Code : `sinequa-docs` doit être connecté. Claude Code lance le serveur lui-même
+(stdio) : rien à garder ouvert, rien à authentifier.
+
+- **Premier lancement** : environ 40 s — `npx` clone le dépôt, installe les dépendances et compile `dist/`.
+  Ensuite le cache npm sert et le démarrage est immédiat. Si Claude Code abandonne au tout premier
+  démarrage, relancer `/mcp`.
+- **Mises à jour** : chaque nouveau lancement prend `main`. Pour figer une version, viser un tag :
+  `github:hebus/sinequa-docs-mcp#v0.1.0`.
+- **Dans Mint**, rien à faire : son `.mcp.json` déclare déjà `sinequa-docs` (le bundle ci-dessous, livré dans
+  `tools/`) ; Claude Code le propose à l'ouverture du projet.
+
+Autres clients MCP : la commande à lancer est `npx -y github:hebus/sinequa-docs-mcp`, en stdio.
+
+## Développer
+
+```bash
+git clone https://github.com/hebus/sinequa-docs-mcp.git
+cd sinequa-docs-mcp
 npm install          # compile aussi dist/ (script prepare)
+claude mcp add --scope user sinequa-docs -- node <chemin>/sinequa-docs-mcp/dist/cli.js
 ```
 
-## Brancher dans Claude Code
-
-**stdio** (recommandé) : Claude Code lance le serveur lui-même, rien à garder ouvert.
-
-```bash
-claude mcp add --scope user sinequa-docs -- node C:/dev/sinequa-docs-mcp/dist/cli.js
-```
-
-**HTTP** : un serveur partagé par plusieurs clients.
+**HTTP** plutôt que stdio : un serveur partagé par plusieurs clients.
 
 ```bash
 npm run start:http                     # http://127.0.0.1:5181/mcp
@@ -41,8 +56,8 @@ npm run bundle       # → bundle/sinequa-docs-mcp.mjs (~780 Ko, dépendances in
 ```
 
 esbuild regroupe le serveur et ses dépendances (SDK MCP, zod, hono) dans un fichier unique : sur le poste
-du consommateur, Node ≥ 20 suffit — ni `npm install`, ni `node_modules`. Il se distribue comme on veut
-(pièce jointe d'une release, partage réseau, téléchargement) :
+du consommateur, Node ≥ 20 suffit — ni `npm install`, ni `node_modules`, ni accès à GitHub. Il se
+distribue comme on veut (pièce jointe d'une release, partage réseau, téléchargement) :
 
 ```bash
 claude mcp add --scope user sinequa-docs -- node C:/outils/sinequa-docs-mcp.mjs
