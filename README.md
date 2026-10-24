@@ -120,3 +120,7 @@ Ajouter une requête qui échoue avant de toucher au classement.
 npm test
 npm run typecheck
 ```
+
+## Licence
+
+[MIT](LICENSE).

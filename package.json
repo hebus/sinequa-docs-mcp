@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "MCP server over the published documentation of @sinequa/atomic, @sinequa/atomic-angular and @sinequa/galactik",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "sinequa-docs-mcp": "dist/cli.js"

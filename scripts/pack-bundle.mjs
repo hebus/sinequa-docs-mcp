@@ -14,13 +14,15 @@ const stage = join(out, "package");
 rmSync(stage, { recursive: true, force: true });
 mkdirSync(stage, { recursive: true });
 copyFileSync(join(out, "sinequa-docs-mcp.mjs"), join(stage, "sinequa-docs-mcp.mjs"));
+copyFileSync(join(root, "LICENSE"), join(stage, "LICENSE"));
 const manifest = {
   name: source.name,
   version: source.version,
   description: source.description,
+  license: source.license,
   type: "module",
   bin: { [source.name]: "sinequa-docs-mcp.mjs" },
-  files: ["sinequa-docs-mcp.mjs"],
+  files: ["sinequa-docs-mcp.mjs", "LICENSE"],
   engines: source.engines,
   repository: source.repository,
 };
