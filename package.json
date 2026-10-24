@@ -18,7 +18,8 @@
     "test": "tsx --test src/**/*.test.ts",
     "typecheck": "tsc --noEmit",
     "eval": "tsx eval/run.ts",
-    "bundle": "node scripts/bundle.mjs"
+    "bundle": "node scripts/bundle.mjs",
+    "pack:bundle": "npm run bundle && node scripts/pack-bundle.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -34,5 +35,9 @@
     "esbuild": "^0.25.12",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hebus/sinequa-docs-mcp.git"
   }
 }

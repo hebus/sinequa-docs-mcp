@@ -14,21 +14,35 @@ Serveur MCP sur la documentation publiée des librairies Sinequa : **atomic**, *
 Une commande, Node ≥ 20 suffit :
 
 ```bash
-claude mcp add --scope user sinequa-docs -- npx -y github:hebus/sinequa-docs-mcp
+claude mcp add --scope user sinequa-docs -- npx -y https://github.com/hebus/sinequa-docs-mcp/releases/latest/download/sinequa-docs-mcp.tgz
 ```
 
 Puis `/mcp` dans Claude Code : `sinequa-docs` doit être connecté. Claude Code lance le serveur lui-même
 (stdio) : rien à garder ouvert, rien à authentifier.
 
-- **Premier lancement** : environ 40 s — `npx` clone le dépôt, installe les dépendances et compile `dist/`.
-  Ensuite le cache npm sert et le démarrage est immédiat. Si Claude Code abandonne au tout premier
-  démarrage, relancer `/mcp`.
-- **Mises à jour** : chaque nouveau lancement prend `main`. Pour figer une version, viser un tag :
-  `github:hebus/sinequa-docs-mcp#v0.1.0`.
+- **Ce qui est téléchargé** : l'archive de la dernière release (~190 Ko) — le bundle seul, sans aucune
+  dépendance : rien à installer ni à compiler, quelques secondes au premier lancement.
+- **Figer une version** : `…/releases/download/v0.1.0/sinequa-docs-mcp.tgz` au lieu de
+  `…/releases/latest/download/…`.
+- **Sans release, depuis `main`** : `npx -y github:hebus/sinequa-docs-mcp` marche aussi, mais clone le dépôt,
+  installe les outils de build et compile (30 à 40 s au premier lancement).
 - **Dans Mint**, rien à faire : son `.mcp.json` déclare déjà `sinequa-docs` (le bundle ci-dessous, livré dans
   `tools/`) ; Claude Code le propose à l'ouverture du projet.
 
-Autres clients MCP : la commande à lancer est `npx -y github:hebus/sinequa-docs-mcp`, en stdio.
+Autres clients MCP : la commande à lancer est
+`npx -y https://github.com/hebus/sinequa-docs-mcp/releases/latest/download/sinequa-docs-mcp.tgz`, en stdio.
+
+## Publier une version
+
+```bash
+npm version patch        # ou minor : met à jour package.json et crée le tag v<version>
+git push --follow-tags
+```
+
+Le workflow `release` (GitHub Actions) vérifie que le tag correspond à `package.json`, lance le typecheck et
+les tests, construit l'archive (`npm run pack:bundle` → `bundle/sinequa-docs-mcp.tgz`), l'installe et
+interroge le serveur, puis crée la release avec l'archive et le bundle `.mjs` en pièces jointes. Le nom des
+pièces jointes ne change pas d'une version à l'autre : c'est ce qui fait marcher l'URL `latest/download`.
 
 ## Développer
 

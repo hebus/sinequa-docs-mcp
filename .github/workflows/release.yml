@@ -1,0 +1,43 @@
+# A tag v<version> (matching package.json) publishes a GitHub release with the bundle and its npm archive:
+#   npx -y https://github.com/hebus/sinequa-docs-mcp/releases/latest/download/sinequa-docs-mcp.tgz
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Tag matches package.json
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run pack:bundle
+      - name: Smoke test of the archive
+        run: |
+          npm install --global ./bundle/sinequa-docs-mcp.tgz
+          sinequa-docs-mcp --http --port=5181 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:5181/ && break; sleep 1; done
+          curl -sf -X POST http://127.0.0.1:5181/mcp \
+            -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | grep -q docs_search
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" bundle/sinequa-docs-mcp.tgz bundle/sinequa-docs-mcp.mjs --generate-notes
