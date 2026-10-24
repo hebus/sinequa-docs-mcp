@@ -1,6 +1,6 @@
 {
   "name": "sinequa-docs-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "MCP server over the published documentation of @sinequa/atomic, @sinequa/atomic-angular and @sinequa/galactik",
   "license": "MIT",
